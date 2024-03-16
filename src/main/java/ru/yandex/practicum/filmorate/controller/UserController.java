@@ -40,7 +40,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users/user")
+    @PostMapping("/users")
     public User createUser(@RequestBody User user) throws ValidationException {
         validateUser(user);
         user.setId(generateId());
@@ -49,7 +49,7 @@ public class UserController {
         return user;
     }
 
-    @PutMapping("/users/user")
+    @PutMapping("/users")
     User updateUser(@RequestBody User user) throws ValidationException {
         validateUser(user);
         users.put(user.getId(), user);

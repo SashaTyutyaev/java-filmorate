@@ -39,7 +39,7 @@ public class FilmController {
         }
     }
 
-    @PostMapping("/films/film")
+    @PostMapping("/films")
     public Film createFilm(@RequestBody Film film) throws ValidationException {
         validateFilm(film);
         film.setId(generateId());
@@ -48,7 +48,7 @@ public class FilmController {
         return film;
     }
 
-    @PutMapping("/films/film")
+    @PutMapping("/films")
     public Film updateFilm(@RequestBody Film film) throws ValidationException {
         validateFilm(film);
         films.put(film.getId(), film);
