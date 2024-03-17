@@ -98,7 +98,7 @@ class FilmControllerTest {
         Film film = Film.builder()
                 .name("adad")
                 .description("dadd")
-                .releaseDate(LocalDate.of(1985, 12, 27))
+                .releaseDate(LocalDate.of(1895, 12, 27))
                 .duration(120)
                 .build();
         assertThrowsExactly(ValidationException.class, () -> filmController.createFilm(film));
@@ -216,7 +216,7 @@ class FilmControllerTest {
                 .id(film.getId())
                 .name("adad")
                 .description("guygyuhhh")
-                .releaseDate(LocalDate.of(1985, 10, 10))
+                .releaseDate(LocalDate.of(1895, 10, 10))
                 .duration(120)
                 .build();
 
