@@ -6,7 +6,9 @@ import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -15,13 +17,17 @@ public class UserController {
 
     private final Map<Integer, User> users = new HashMap<>();
 
-    private int generatedId = 0;
+    private int generatedId = 1;
 
     private int generateId() {
         return generatedId++;
     }
 
     private void validateUser(User user) throws ValidationException {
+        if (user == null) {
+            log.info("Пустые поля пользователя");
+            throw new ValidationException("Пустые поля пользователя");
+        }
         if (user.getEmail() == null || user.getEmail().isBlank() || !user.getEmail().contains("@")) {
             log.info("У пользователя неккоретная почта");
             throw new ValidationException("У пользователя неккоректная почта");
@@ -51,6 +57,10 @@ public class UserController {
 
     @PutMapping("/users")
     User updateUser(@RequestBody User user) throws ValidationException {
+        if (!users.containsKey(user.getId())) {
+            log.info("Пользователь отсуствует в списке");
+            throw new ValidationException("Пользователь отсутствует в списке");
+        }
         validateUser(user);
         users.put(user.getId(), user);
         log.info("Обновили пользователя под идентификатором - " + user.getId());
@@ -58,8 +68,8 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public Map<Integer, User> getUsers() {
+    public List<User> getUsers() {
         log.info("Текущее количестов пользователей - " + users.size());
-        return users;
+        return new ArrayList<>(users.values());
     }
 }

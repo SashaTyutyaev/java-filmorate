@@ -28,7 +28,7 @@ class FilmControllerTest {
                 .duration(120)
                 .build();
         filmController.createFilm(film);
-        assertEquals(film, filmController.getFilms().get(film.getId()));
+        assertEquals(film, filmController.getFilms().get(0));
     }
 
     @Test
@@ -78,7 +78,7 @@ class FilmControllerTest {
                 .duration(120)
                 .build();
         filmController.createFilm(film);
-        assertEquals(film, filmController.getFilms().get(film.getId()));
+        assertEquals(film, filmController.getFilms().get(0));
     }
 
     @Test
@@ -134,7 +134,7 @@ class FilmControllerTest {
                 .build();
         filmController.updateFilm(film2);
 
-        assertEquals(film2, filmController.getFilms().get(film.getId()));
+        assertEquals(film2, filmController.getFilms().get(0));
     }
 
     @Test
@@ -177,7 +177,7 @@ class FilmControllerTest {
                 .build();
         filmController.updateFilm(film2);
 
-        assertEquals(film2, filmController.getFilms().get(film.getId()));
+        assertEquals(film2, filmController.getFilms().get(0));
     }
 
     @Test
