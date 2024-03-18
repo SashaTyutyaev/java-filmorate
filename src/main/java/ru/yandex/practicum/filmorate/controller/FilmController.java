@@ -17,7 +17,7 @@ import java.util.Map;
 public class FilmController {
 
     private final Map<Integer, Film> films = new HashMap<>();
-    int generatedId = 1;
+    private int generatedId = 1;
 
     private int generateId() {
         return generatedId++;
