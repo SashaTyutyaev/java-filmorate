@@ -13,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @Slf4j
+@RequestMapping("/users")
 public class UserController {
 
     private final Map<Integer, User> users = new HashMap<>();
@@ -46,8 +47,8 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users")
-    public User createUser(@RequestBody User user) throws ValidationException {
+    @PostMapping
+    public User createUser(@RequestBody User user) {
         validateUser(user);
         user.setId(generateId());
         users.put(user.getId(), user);
@@ -55,8 +56,8 @@ public class UserController {
         return user;
     }
 
-    @PutMapping("/users")
-    User updateUser(@RequestBody User user) throws ValidationException {
+    @PutMapping
+    User updateUser(@RequestBody User user) {
         if (!users.containsKey(user.getId())) {
             log.info("Пользователь отсуствует в списке");
             throw new ValidationException("Пользователь отсутствует в списке");
@@ -67,7 +68,7 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public List<User> getUsers() {
         log.info("Текущее количестов пользователей - " + users.size());
         return new ArrayList<>(users.values());

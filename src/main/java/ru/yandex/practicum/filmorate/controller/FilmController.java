@@ -13,6 +13,7 @@ import java.util.Map;
 
 @RestController
 @Slf4j
+@RequestMapping("/films")
 public class FilmController {
 
     private final Map<Integer, Film> films = new HashMap<>();
@@ -45,8 +46,8 @@ public class FilmController {
         }
     }
 
-    @PostMapping("/films")
-    public Film createFilm(@RequestBody Film film) throws ValidationException {
+    @PostMapping
+    public Film createFilm(@RequestBody Film film) {
         validateFilm(film);
         film.setId(generateId());
         films.put(film.getId(), film);
@@ -54,8 +55,8 @@ public class FilmController {
         return film;
     }
 
-    @PutMapping("/films")
-    public Film updateFilm(@RequestBody Film film) throws ValidationException {
+    @PutMapping
+    public Film updateFilm(@RequestBody Film film) {
         if (!films.containsKey(film.getId())) {
             log.info("Фильм в списке отсутсвует");
             throw new ValidationException("Фильм в списке отсуствует");
@@ -66,7 +67,7 @@ public class FilmController {
         return film;
     }
 
-    @GetMapping("/films")
+    @GetMapping
     public List<Film> getFilms() {
         log.info("Текущее количестов фильмов - " + films.size());
         return new ArrayList<>(films.values());

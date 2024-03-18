@@ -1,3 +1,4 @@
+
 package ru.yandex.practicum.filmorate.controller;
 
 import org.junit.jupiter.api.AfterEach;
@@ -20,7 +21,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void createFilm_ShouldReturnFilm() throws ValidationException {
+    public void createFilmShouldReturnFilm() {
         Film film = Film.builder()
                 .name("adad")
                 .description("daad")
@@ -32,7 +33,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void getAllFilms_ShouldReturnMapOfFilms() throws ValidationException {
+    public void getAllFilmsShouldReturnMapOfFilms() {
         Film film = Film.builder()
                 .name("adad")
                 .description("daad")
@@ -59,7 +60,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void createFilm_WithoutName_ShouldThrowException() {
+    public void createFilmShouldThrowExceptionWithoutName() {
         Film film = Film.builder()
                 .description("adad")
                 .duration(120)
@@ -69,7 +70,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void createFilm_With200CharDescription_ShouldReturnFilm() throws ValidationException {
+    public void createFilmShouldReturnFilmWith200CharDescription() {
         Film film = Film.builder()
                 .name("adad")
                 .description("daadadaaaafjsdhfjhfjhdsfjhfjksdhfjsdfhjdsfhjsfhsjfhkjsfhjshdfu3hfur3hfurhugh3gurogjrigjirejgiegghjgytvytyghghkghkghghgkjgjhghjkhghkghghghjjghghkgj" +
@@ -82,7 +83,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void createFilm_WithMoreThen200CharDescription_ShouldThrowException() throws ValidationException {
+    public void createFilmShouldThrowExceptionWithMoreThen200CharDescription() {
         Film film = Film.builder()
                 .name("adad")
                 .description("daadadaaaafjsdhfjhfjhdsfjhfjksdhfjsdfhjdsfhjsfhsjfhkjsfhjshdfu3hfur3hfurhugh3gurogjrigjirejgiegghjgytvytyghghkghkghghgkjgjhghjkhghkghghghjjghghkgj" +
@@ -94,7 +95,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void createFilm_WithReleaseDateIsBeforeDateLimit_ShouldThrowException() {
+    public void createFilmShouldThrowExceptionWithReleaseDateIsBeforeDateLimit() {
         Film film = Film.builder()
                 .name("adad")
                 .description("dadd")
@@ -105,7 +106,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void createFilm_WithNegativeDuration_ShouldThrowException() {
+    public void createFilmShouldThrowExceptionWithNegativeDuration() {
         Film film = Film.builder()
                 .name("adad")
                 .description("dadd")
@@ -116,7 +117,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void updateFilm_ShouldReturnUpdatedFilm() throws ValidationException {
+    public void updateFilmShouldReturnUpdatedFilm() {
         Film film = Film.builder()
                 .name("adad")
                 .description("daad")
@@ -138,7 +139,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void updateFilm_WithoutName_ShouldThrowException() throws ValidationException {
+    public void updateFilmShouldThrowExceptionWithoutName() {
         Film film = Film.builder()
                 .name("adad")
                 .description("daad")
@@ -158,7 +159,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void updateFilm_With200CharDescription_ShouldReturnFilm() throws ValidationException {
+    public void updateFilmShouldReturnFilmWith200CharDescription() {
         Film film = Film.builder()
                 .name("adad")
                 .description("daad")
@@ -181,7 +182,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void updateFilm_WithMoreThen200CharDescription_ShouldThrowException() throws ValidationException {
+    public void updateFilmShouldThrowExceptionWithMoreThen200CharDescription() {
         Film film = Film.builder()
                 .name("adad")
                 .description("daad")
@@ -203,7 +204,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void updateFilm_WithReleaseDateBeforeDateLimit_ShouldThrowException() throws ValidationException {
+    public void updateFilmShouldThrowExceptionWithReleaseDateBeforeDateLimit() {
         Film film = Film.builder()
                 .name("adad")
                 .description("daad")
@@ -224,7 +225,7 @@ class FilmControllerTest {
     }
 
     @Test
-    public void updateFilm_WithNegativeDuration_ShouldThrowException() throws ValidationException {
+    public void updateFilmShouldThrowExceptionWithNegativeDuration() {
         Film film = Film.builder()
                 .name("adad")
                 .description("daad")

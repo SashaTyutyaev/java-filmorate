@@ -22,7 +22,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUser_ShouldReturnUser() throws ValidationException {
+    public void createUserShouldReturnUser()   {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -35,7 +35,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getAllUsers_ShouldReturnMapOfUsers() throws ValidationException {
+    public void getAllUsersShouldReturnMapOfUsers()  {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -64,7 +64,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUser_WithoutEmail_ShouldThrowException() throws ValidationException {
+    public void createUserShouldThrowExceptionWhenIncorrectEmail()  {
         User user = User.builder()
                 .name("asas")
                 .login("slsls")
@@ -75,7 +75,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUser_WithoutSobakaInEmail_ShouldThrowException() throws ValidationException {
+    public void createUserShouldThrowExceptionWhenNoSobakaInEmail()  {
         User user = User.builder()
                 .name("asas")
                 .email("shshshs.ru")
@@ -87,7 +87,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUser_WithoutLogin_ShouldThrowException() throws ValidationException {
+    public void createUserShouldThrowExceptionWhenIncorrectLogin()  {
         User user = User.builder()
                 .name("asas")
                 .email("shshshs@dd.ru")
@@ -98,7 +98,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUser_WithoutName_ShouldReturnLoginAsName() throws ValidationException {
+    public void createUserShouldReturnLoginAsNameWhenWithoutName()  {
         User user = User.builder()
                 .login("sasas")
                 .email("shshshs@dd.ru")
@@ -111,7 +111,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUser_WithBirthdayInFuture_ShouldThrowException() throws ValidationException {
+    public void createUserShouldThrowExceptionWhenBirthdayInFuture()  {
         User user = User.builder()
                 .name("asas")
                 .login("adad")
@@ -123,7 +123,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUser_ReturnUpdatedUser() throws ValidationException {
+    public void updateUserReturnUpdatedUser()  {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -144,7 +144,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUser_WithoutEmail_ShouldThrowException() throws ValidationException {
+    public void updateUserShouldThrowExceptionWhenWithoutEmail()  {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -163,7 +163,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUser_WithoutSobakaInEmail_ShouldThrowException() throws ValidationException {
+    public void updateUserShouldThrowExceptionWhenWithoutSobakaInEmail()  {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -183,7 +183,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUser_WithoutLogin_ShouldThrowException() throws ValidationException {
+    public void updateUserShouldThrowExceptionWhenWithoutLogin() {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -202,7 +202,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUser_WithoutName_ShouldReturnLoginAsName() throws ValidationException {
+    public void updateUserShouldReturnLoginAsNameWhenWithoutName() {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -223,7 +223,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUser_WhenBirthDayInFuture_ShouldThrowException() throws ValidationException {
+    public void updateUserShouldThrowExceptionWhenBirthDayInFuture() {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")

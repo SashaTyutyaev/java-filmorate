@@ -1,6 +1,9 @@
 package ru.yandex.practicum.filmorate.exceptions;
 
-public class ValidationException extends Exception {
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+public class ValidationException extends RuntimeException {
 
     public ValidationException() {
     }
@@ -8,4 +11,5 @@ public class ValidationException extends Exception {
     public ValidationException(String message) {
         super.getMessage();
     }
+
 }
