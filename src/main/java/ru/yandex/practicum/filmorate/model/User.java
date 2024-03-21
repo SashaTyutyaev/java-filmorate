@@ -4,19 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
-/**
- * Film.
- */
-@Builder
 @Data
+@Builder
 @AllArgsConstructor
-public class Film {
+public class User {
     private Integer id;
+    private String email;
+    private String login;
     private String name;
-    private String description;
-    private LocalDate releaseDate;
-    private Integer duration;
-
+    private LocalDate birthday;
 }
