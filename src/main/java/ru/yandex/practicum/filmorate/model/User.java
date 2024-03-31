@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Data
 @Builder
@@ -16,4 +18,6 @@ public class User {
     private String login;
     private String name;
     private LocalDate birthday;
+    private final Set<Integer> friends = new LinkedHashSet<>();
+    private final Set<Integer> films = new LinkedHashSet<>();
 }
