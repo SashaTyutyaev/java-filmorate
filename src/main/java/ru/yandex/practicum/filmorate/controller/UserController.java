@@ -43,6 +43,7 @@ public class UserController {
             throw new ValidationException("У пользователя неккоректная дата рождения");
         }
     }
+
     @PostMapping
     public User createUser(@RequestBody User user) {
         User user1 = userService.createUser(user);

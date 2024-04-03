@@ -24,6 +24,7 @@ public class FilmController {
     private final FilmService filmService;
     @Autowired
     private final UserService userService;
+
     private void validateFilm(Film film) throws ValidationException {
         if (film == null) {
             log.info("Пустые поля фильма");
@@ -46,6 +47,7 @@ public class FilmController {
             throw new ValidationException("Неккоретная длительность фильма");
         }
     }
+
     @PostMapping
     public Film createFilm(@RequestBody Film film) {
         validateFilm(film);
