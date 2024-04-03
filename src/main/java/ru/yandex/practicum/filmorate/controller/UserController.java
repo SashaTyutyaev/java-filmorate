@@ -2,9 +2,7 @@ package ru.yandex.practicum.filmorate.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.exceptions.EntityNotFoundException;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.UserService;
@@ -18,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
     private final UserService userService;
 
     private void validateUser(User user) throws ValidationException {
@@ -69,24 +66,16 @@ public class UserController {
 
     @PutMapping("/{id}/friends/{friendsId}")
     public void addFriend(@RequestBody @PathVariable int id, @RequestBody @PathVariable int friendsId) {
-        if (userService.getUsers().contains(userService.getUserById(id)) && userService.getUsers().contains(userService.getUserById(friendsId))) {
-            validateUser(userService.getUserById(id));
-            validateUser(userService.getUserById(friendsId));
-            userService.addFriend(id, friendsId);
-        } else {
-            throw new EntityNotFoundException("Пользователь не найден");
-        }
+        validateUser(userService.getUserById(id));
+        validateUser(userService.getUserById(friendsId));
+        userService.addFriend(id, friendsId);
     }
 
     @DeleteMapping("/{id}/friends/{friendsId}")
     public void deleteFriend(@PathVariable int id, @PathVariable int friendsId) {
-        if (userService.getUsers().contains(userService.getUserById(id)) && userService.getUsers().contains(userService.getUserById(friendsId))) {
-            validateUser(userService.getUserById(id));
-            validateUser(userService.getUserById(friendsId));
-            userService.deleteFriend(id, friendsId);
-        } else {
-            throw new EntityNotFoundException("Пользователь не найден");
-        }
+        validateUser(userService.getUserById(id));
+        validateUser(userService.getUserById(friendsId));
+        userService.deleteFriend(id, friendsId);
     }
 
     @GetMapping("/{id}/friends")

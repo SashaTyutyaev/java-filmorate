@@ -2,7 +2,6 @@ package ru.yandex.practicum.filmorate.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.filmorate.exceptions.EntityNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
@@ -10,18 +9,18 @@ import ru.yandex.practicum.filmorate.storage.user.UserStorage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
     private final UserStorage inMemoryUserStorage;
 
     public User createUser(User user) {
         if (user == null) {
-            log.debug("Пользователь " + user.getId() + " не найден");
+            log.info("Пользователь " + user.getId() + " не найден");
             throw new EntityNotFoundException("Пользователь не найден");
         }
         return inMemoryUserStorage.createUser(user);
@@ -29,7 +28,7 @@ public class UserService {
 
     public User updateUser(User user) {
         if (user == null) {
-            log.debug("Пользователь " + user.getId() + " не найден");
+            log.info("Пользователь " + user.getId() + " не найден");
             throw new EntityNotFoundException("Пользователь не найден");
         }
         return inMemoryUserStorage.updateUser(user);
@@ -37,7 +36,7 @@ public class UserService {
 
     public void deleteUser(User user) {
         if (user == null) {
-            log.debug("Пользователь " + user.getId() + " не найден");
+            log.info("Пользователь " + user.getId() + " не найден");
             throw new EntityNotFoundException("Пользователь не найден");
         }
         inMemoryUserStorage.deleteUser(user);
@@ -47,21 +46,21 @@ public class UserService {
         return inMemoryUserStorage.getUsers();
     }
 
+    public Map<Integer, User> getMapOfUsers() {
+        return inMemoryUserStorage.getMapOfUsers();
+    }
+
     public User getUserById(Integer id) {
+        if (getMapOfUsers().get(id) == null) {
+            log.info("Пользователь под идентификатором - " + id + " не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
+        }
         return inMemoryUserStorage.getUserById(id);
     }
 
     public void addFriend(Integer userId, Integer friendId) {
         User user = getUserById(userId);
         User friend = getUserById(friendId);
-        if (user == null) {
-            log.debug("Пользователь " + userId + " не найден");
-            throw new EntityNotFoundException("Пользователь не найден");
-        }
-        if (friend == null) {
-            log.debug("Пользователь " + friendId + " не найден");
-            throw new EntityNotFoundException("Пользователь не найден");
-        }
         user.getFriends().add(friendId);
         friend.getFriends().add(userId);
         log.info("Добавили друга " + friendId + " пользователю " + userId);
@@ -70,14 +69,6 @@ public class UserService {
     public void deleteFriend(Integer userId, Integer friendId) {
         User user = getUserById(userId);
         User friend = getUserById(friendId);
-        if (user == null) {
-            log.debug("Пользователь " + userId + " не найден");
-            throw new EntityNotFoundException("Пользователь не найден");
-        }
-        if (friend == null) {
-            log.debug("Пользователь " + friendId + " не найден");
-            throw new EntityNotFoundException("Пользователь не найден");
-        }
         user.getFriends().remove(friendId);
         friend.getFriends().remove(userId);
         log.info("Удалили друга " + friendId + " у пользователя " + userId);
@@ -93,7 +84,7 @@ public class UserService {
             log.info("Список друзей у пользователя " + userId + " - " + friendsList);
             return friendsList;
         } else {
-            log.debug("Пользователь " + userId + " не найден");
+            log.info("Пользователь " + userId + " не найден");
             throw new EntityNotFoundException("Пользователь не найден");
         }
     }
@@ -101,14 +92,6 @@ public class UserService {
     public List<User> getCommonFriends(Integer user1Id, Integer user2Id) {
         User user = getUserById(user1Id);
         User user2 = getUserById(user2Id);
-        if (user == null) {
-            log.debug("Пользователь " + user1Id + " не найден");
-            throw new EntityNotFoundException("Пользователь не найден");
-        }
-        if (user2 == null) {
-            log.debug("Пользователь " + user2Id + " не найден");
-            throw new EntityNotFoundException("Пользователь не найден");
-        }
         List<User> commonFriends = new ArrayList<>();
 
         for (User userInList : getUsers()) {

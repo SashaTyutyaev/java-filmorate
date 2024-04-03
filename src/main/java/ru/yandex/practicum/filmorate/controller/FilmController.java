@@ -2,14 +2,11 @@ package ru.yandex.practicum.filmorate.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.yandex.practicum.filmorate.exceptions.EntityNotFoundException;
 import ru.yandex.practicum.filmorate.exceptions.IncorrectParameterException;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
 import ru.yandex.practicum.filmorate.service.FilmService;
-import ru.yandex.practicum.filmorate.service.UserService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,10 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FilmController {
 
-    @Autowired
     private final FilmService filmService;
-    @Autowired
-    private final UserService userService;
 
     private void validateFilm(Film film) throws ValidationException {
         if (film == null) {
@@ -72,22 +66,14 @@ public class FilmController {
 
     @PutMapping("/{id}/like/{userId}")
     public void addLike(@PathVariable int id, @PathVariable int userId) {
-        if (filmService.getFilms().contains(filmService.getFilmById(id))) {
-            validateFilm(filmService.getFilmById(id));
-            filmService.addLike(id, userId);
-        } else {
-            throw new EntityNotFoundException("Фильм не найден");
-        }
+        validateFilm(filmService.getFilmById(id));
+        filmService.addLike(id, userId);
     }
 
     @DeleteMapping("/{id}/like/{userId}")
     public void deleteLike(@PathVariable int id, @PathVariable int userId) {
-        if (filmService.getFilms().contains(filmService.getFilmById(id)) && userService.getUsers().contains(userService.getUserById(userId))) {
-            validateFilm(filmService.getFilmById(id));
-            filmService.deleteLike(userId, id);
-        } else {
-            throw new EntityNotFoundException("Фильм не найден");
-        }
+        validateFilm(filmService.getFilmById(id));
+        filmService.deleteLike(userId, id);
     }
 
     @GetMapping("/popular")
