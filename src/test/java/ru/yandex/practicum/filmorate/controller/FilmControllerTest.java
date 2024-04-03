@@ -23,7 +23,7 @@ class FilmControllerTest {
     UserService userService = new UserService(inMemoryUserStorage);
     InMemoryFilmStorage inMemoryFilmStorage = new InMemoryFilmStorage();
     FilmService filmService = new FilmService(inMemoryFilmStorage, userService);
-    FilmController filmController = new FilmController(filmService);
+    FilmController filmController = new FilmController(filmService,userService);
 
     @AfterEach
     void afterEach() {
