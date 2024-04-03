@@ -1,61 +1,66 @@
 package ru.yandex.practicum.filmorate.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.yandex.practicum.filmorate.exceptions.UserNotFoundException;
+import ru.yandex.practicum.filmorate.exceptions.EntityNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
+import ru.yandex.practicum.filmorate.storage.user.UserStorage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserService {
 
-    private InMemoryUserStorage inMemoryUserStorage;
-
     @Autowired
-    public UserService(InMemoryUserStorage inMemoryUserStorage) {
-        this.inMemoryUserStorage = inMemoryUserStorage;
-    }
+    private final UserStorage inMemoryUserStorage;
 
     public User createUser(User user) {
+        if (user == null) {
+            log.debug("Пользователь " + user.getId() + " не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
+        }
         return inMemoryUserStorage.createUser(user);
     }
 
     public User updateUser(User user) {
+        if (user == null) {
+            log.debug("Пользователь " + user.getId() + " не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
+        }
         return inMemoryUserStorage.updateUser(user);
     }
 
     public void deleteUser(User user) {
+        if (user == null) {
+            log.debug("Пользователь " + user.getId() + " не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
+        }
         inMemoryUserStorage.deleteUser(user);
-    }
-
-    public void deleteAllUsers() {
-        inMemoryUserStorage.deleteAllUsers();
     }
 
     public List<User> getUsers() {
         return inMemoryUserStorage.getUsers();
     }
 
-    public Map<Integer, User> getMapOfUsers() {
-        return inMemoryUserStorage.getMapOfUsers();
+    public User getUserById(Integer id) {
+        return inMemoryUserStorage.getUserById(id);
     }
 
     public void addFriend(Integer userId, Integer friendId) {
-        User user = getMapOfUsers().get(userId);
-        User friend = getMapOfUsers().get(friendId);
+        User user = getUserById(userId);
+        User friend = getUserById(friendId);
         if (user == null) {
             log.debug("Пользователь " + userId + " не найден");
-            throw new UserNotFoundException("Пользователь не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
         }
         if (friend == null) {
             log.debug("Пользователь " + friendId + " не найден");
-            throw new UserNotFoundException("Пользователь не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
         }
         user.getFriends().add(friendId);
         friend.getFriends().add(userId);
@@ -63,15 +68,15 @@ public class UserService {
     }
 
     public void deleteFriend(Integer userId, Integer friendId) {
-        User user = getMapOfUsers().get(userId);
-        User friend = getMapOfUsers().get(friendId);
+        User user = getUserById(userId);
+        User friend = getUserById(friendId);
         if (user == null) {
             log.debug("Пользователь " + userId + " не найден");
-            throw new UserNotFoundException("Пользователь не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
         }
         if (friend == null) {
             log.debug("Пользователь " + friendId + " не найден");
-            throw new UserNotFoundException("Пользователь не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
         }
         user.getFriends().remove(friendId);
         friend.getFriends().remove(userId);
@@ -79,37 +84,37 @@ public class UserService {
     }
 
     public List<User> getFriends(Integer userId) {
-        if (getMapOfUsers().get(userId) != null) {
+        if (getUserById(userId) != null) {
             List<User> friendsList = new ArrayList<>();
-            for (int friendId : inMemoryUserStorage.getMapOfUsers().get(userId).getFriends()) {
-                User friend = inMemoryUserStorage.getMapOfUsers().get(friendId);
+            for (int friendId : getUserById(userId).getFriends()) {
+                User friend = getUserById(friendId);
                 friendsList.add(friend);
             }
             log.info("Список друзей у пользователя " + userId + " - " + friendsList);
             return friendsList;
         } else {
             log.debug("Пользователь " + userId + " не найден");
-            throw new UserNotFoundException("Пользователь не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
         }
     }
 
     public List<User> getCommonFriends(Integer user1Id, Integer user2Id) {
-        User user = getMapOfUsers().get(user1Id);
-        User user2 = getMapOfUsers().get(user2Id);
+        User user = getUserById(user1Id);
+        User user2 = getUserById(user2Id);
         if (user == null) {
             log.debug("Пользователь " + user1Id + " не найден");
-            throw new UserNotFoundException("Пользователь не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
         }
         if (user2 == null) {
             log.debug("Пользователь " + user2Id + " не найден");
-            throw new UserNotFoundException("Пользователь не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
         }
         List<User> commonFriends = new ArrayList<>();
 
-        for (Integer userId : getMapOfUsers().keySet()) {
-            if (user.getFriends().contains(userId)
-                    && user2.getFriends().contains(userId)) {
-                commonFriends.add(getMapOfUsers().get(userId));
+        for (User userInList : getUsers()) {
+            if (user.getFriends().contains(userInList.getId())
+                    && user2.getFriends().contains(userInList.getId())) {
+                commonFriends.add(getUserById(userInList.getId()));
             }
         }
         log.info("Список общих друзей у пользователя " + user1Id + " и " + user2Id + " - " + commonFriends);

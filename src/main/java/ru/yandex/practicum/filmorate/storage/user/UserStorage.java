@@ -12,7 +12,8 @@ public interface UserStorage {
 
     List<User> getUsers();
 
+    User getUserById(Integer id);
+
     void deleteUser(User user);
 
-    void deleteAllUsers();
 }
