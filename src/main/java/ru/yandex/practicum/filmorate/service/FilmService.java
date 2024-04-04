@@ -11,7 +11,6 @@ import ru.yandex.practicum.filmorate.storage.film.FilmStorage;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,15 +38,7 @@ public class FilmService {
     }
 
     public Film getFilmById(Integer id) {
-        if (getMapOfFilms().get(id) == null) {
-            log.info("Фильм под идентификатором - " + id + " не найден");
-            throw new EntityNotFoundException("Фильм не найден");
-        }
         return filmStorage.getFilmById(id);
-    }
-
-    public Map<Integer, Film> getMapOfFilms() {
-        return filmStorage.getMapOfFilms();
     }
 
     public void addLike(Integer filmId, Integer userId) {

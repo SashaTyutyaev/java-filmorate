@@ -9,7 +9,6 @@ import ru.yandex.practicum.filmorate.storage.user.UserStorage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Slf4j
@@ -46,15 +45,7 @@ public class UserService {
         return inMemoryUserStorage.getUsers();
     }
 
-    public Map<Integer, User> getMapOfUsers() {
-        return inMemoryUserStorage.getMapOfUsers();
-    }
-
     public User getUserById(Integer id) {
-        if (getMapOfUsers().get(id) == null) {
-            log.info("Пользователь под идентификатором - " + id + " не найден");
-            throw new EntityNotFoundException("Пользователь не найден");
-        }
         return inMemoryUserStorage.getUserById(id);
     }
 

@@ -43,9 +43,8 @@ public class UserController {
 
     @PostMapping
     public User createUser(@RequestBody User user) {
-        User user1 = userService.createUser(user);
-        validateUser(user1);
-        return user1;
+        validateUser(user);
+        return userService.createUser(user);
     }
 
     @PutMapping
@@ -66,15 +65,11 @@ public class UserController {
 
     @PutMapping("/{id}/friends/{friendsId}")
     public void addFriend(@RequestBody @PathVariable int id, @RequestBody @PathVariable int friendsId) {
-        validateUser(userService.getUserById(id));
-        validateUser(userService.getUserById(friendsId));
         userService.addFriend(id, friendsId);
     }
 
     @DeleteMapping("/{id}/friends/{friendsId}")
     public void deleteFriend(@PathVariable int id, @PathVariable int friendsId) {
-        validateUser(userService.getUserById(id));
-        validateUser(userService.getUserById(friendsId));
         userService.deleteFriend(id, friendsId);
     }
 
