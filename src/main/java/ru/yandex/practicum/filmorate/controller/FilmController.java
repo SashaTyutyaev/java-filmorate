@@ -66,13 +66,11 @@ public class FilmController {
 
     @PutMapping("/{id}/like/{userId}")
     public void addLike(@PathVariable int id, @PathVariable int userId) {
-        validateFilm(filmService.getFilmById(id));
         filmService.addLike(id, userId);
     }
 
     @DeleteMapping("/{id}/like/{userId}")
     public void deleteLike(@PathVariable int id, @PathVariable int userId) {
-        validateFilm(filmService.getFilmById(id));
         filmService.deleteLike(userId, id);
     }
 

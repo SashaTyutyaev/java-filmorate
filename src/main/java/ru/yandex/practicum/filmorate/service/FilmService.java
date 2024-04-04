@@ -42,6 +42,17 @@ public class FilmService {
     }
 
     public void addLike(Integer filmId, Integer userId) {
+
+        if (userService.getUserById(userId) == null) {
+            log.info("Пользователь под идентификатором - " + userId + " не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
+        }
+
+        if (getFilmById(filmId) == null) {
+            log.info("Фильм под идентификатором - " + filmId + " не найден");
+            throw new EntityNotFoundException("Фильм не найден");
+        }
+
         User user = userService.getUserById(userId);
         Film film = getFilmById(filmId);
         int likes;
@@ -59,6 +70,17 @@ public class FilmService {
 
 
     public void deleteLike(Integer userId, Integer filmId) {
+
+        if (userService.getUserById(userId) == null) {
+            log.info("Пользователь под идентификатором - " + userId + " не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
+        }
+
+        if (getFilmById(filmId) == null) {
+            log.info("Фильм под идентификатором - " + filmId + " не найден");
+            throw new EntityNotFoundException("Фильм не найден");
+        }
+
         User user = userService.getUserById(userId);
         Film film = getFilmById(filmId);
         if (user.getLikedFilms().contains(film.getId())) {

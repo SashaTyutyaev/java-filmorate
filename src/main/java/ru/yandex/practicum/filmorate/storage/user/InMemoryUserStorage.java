@@ -49,10 +49,6 @@ public class InMemoryUserStorage implements UserStorage {
 
     @Override
     public User getUserById(Integer id) {
-        if (users.get(id) == null) {
-            log.info("Пользователь под идентификатором - " + id + " не найден");
-            throw new EntityNotFoundException("Пользователь не найден");
-        }
         return users.get(id);
     }
 

@@ -50,6 +50,16 @@ public class UserService {
     }
 
     public void addFriend(Integer userId, Integer friendId) {
+
+        if (getUserById(userId) == null) {
+            log.info("Пользователь под идентификатором - " + userId + " не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
+        }
+        if (getUserById(friendId) == null) {
+            log.info("Пользователь под идентификатором - " + friendId + " не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
+        }
+
         User user = getUserById(userId);
         User friend = getUserById(friendId);
         user.getFriends().add(friendId);
@@ -58,6 +68,16 @@ public class UserService {
     }
 
     public void deleteFriend(Integer userId, Integer friendId) {
+
+        if (getUserById(userId) == null) {
+            log.info("Пользователь под идентификатором - " + userId + " не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
+        }
+        if (getUserById(friendId) == null) {
+            log.info("Пользователь под идентификатором - " + friendId + " не найден");
+            throw new EntityNotFoundException("Пользователь не найден");
+        }
+
         User user = getUserById(userId);
         User friend = getUserById(friendId);
         user.getFriends().remove(friendId);
