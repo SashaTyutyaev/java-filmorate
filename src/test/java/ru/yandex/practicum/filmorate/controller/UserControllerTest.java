@@ -2,19 +2,23 @@ package ru.yandex.practicum.filmorate.controller;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
+import ru.yandex.practicum.filmorate.service.UserService;
+import ru.yandex.practicum.filmorate.storage.user.InMemoryUserStorage;
 
 import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 @SpringBootTest
 public class UserControllerTest {
 
-    UserController userController = new UserController();
+    InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
+    UserService userService = new UserService(inMemoryUserStorage);
+    UserController userController = new UserController(userService);
 
     @AfterEach
     void afterEach() {
@@ -22,7 +26,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUserShouldReturnUser()   {
+    public void createUserShouldReturnUser() {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -35,7 +39,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getAllUsersShouldReturnMapOfUsers()  {
+    public void getAllUsersShouldReturnMapOfUsers() {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -64,7 +68,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUserShouldThrowExceptionWhenIncorrectEmail()  {
+    public void createUserShouldThrowExceptionWhenIncorrectEmail() {
         User user = User.builder()
                 .name("asas")
                 .login("slsls")
@@ -75,7 +79,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUserShouldThrowExceptionWhenNoSobakaInEmail()  {
+    public void createUserShouldThrowExceptionWhenNoSobakaInEmail() {
         User user = User.builder()
                 .name("asas")
                 .email("shshshs.ru")
@@ -87,7 +91,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUserShouldThrowExceptionWhenIncorrectLogin()  {
+    public void createUserShouldThrowExceptionWhenIncorrectLogin() {
         User user = User.builder()
                 .name("asas")
                 .email("shshshs@dd.ru")
@@ -98,7 +102,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUserShouldReturnLoginAsNameWhenWithoutName()  {
+    public void createUserShouldReturnLoginAsNameWhenWithoutName() {
         User user = User.builder()
                 .login("sasas")
                 .email("shshshs@dd.ru")
@@ -111,7 +115,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void createUserShouldThrowExceptionWhenBirthdayInFuture()  {
+    public void createUserShouldThrowExceptionWhenBirthdayInFuture() {
         User user = User.builder()
                 .name("asas")
                 .login("adad")
@@ -123,7 +127,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUserReturnUpdatedUser()  {
+    public void updateUserReturnUpdatedUser() {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -144,7 +148,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUserShouldThrowExceptionWhenWithoutEmail()  {
+    public void updateUserShouldThrowExceptionWhenWithoutEmail() {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
@@ -163,7 +167,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void updateUserShouldThrowExceptionWhenWithoutSobakaInEmail()  {
+    public void updateUserShouldThrowExceptionWhenWithoutSobakaInEmail() {
         User user = User.builder()
                 .name("asas")
                 .email("asass@mail.ru")
