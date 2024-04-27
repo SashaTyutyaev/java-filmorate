@@ -1,6 +1,7 @@
 # java-filmorate
 Template repository for Filmorate project.
-![Untitled](https://github.com/SashaTyutyaev/java-filmorate/assets/145023074/d4d41906-357f-4075-9ff5-197fadc7284e)
+![Untitled (1)](https://github.com/SashaTyutyaev/java-filmorate/assets/145023074/e03ad9f3-9abc-4458-949c-86a9b503c8d3)
+
 
 ## Примеры использования
 ### Добавление пользователя
