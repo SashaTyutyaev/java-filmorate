@@ -7,7 +7,7 @@ Template repository for Filmorate project.
 ### Добавление пользователя
 `INSERT INTO user (login, name, email, birthday) VALUES ('user_login', 'user_name', 'user@mail.com', '2000-01-01');`
 ### Добавление фильма
-`INSERT INTO film (name, release_date, duration, description, rating) VALUES ('movie_ame', '2020-01-01', 120, 'Description', 'PG-16');`
+`INSERT INTO film (name, release_date, duration, description, rating_id) VALUES ('movie_ame', '2020-01-01', 120, 'Description', '2');`
 ### Добавление жанра к фильму
 `INSERT INTO film_genre (film_id, genre_id) VALUES (1,2)`
 ### Запрос в друзья
