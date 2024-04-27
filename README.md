@@ -1,6 +1,7 @@
 # java-filmorate
 Template repository for Filmorate project.
-![Untitled (1)](https://github.com/SashaTyutyaev/java-filmorate/assets/145023074/e03ad9f3-9abc-4458-949c-86a9b503c8d3)
+![postgres - public](https://github.com/SashaTyutyaev/java-filmorate/assets/145023074/d4c33439-3f85-4993-b929-945bc44a0771)
+
 
 
 ## Примеры использования
