@@ -20,7 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FriendshipDbStorage implements FriendshipStorage {
 
-    JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Override
     public void addUserToFriends(int userId, int friendId) {

@@ -21,7 +21,7 @@ import java.util.Set;
 @Slf4j
 public class UserDbStorageImpl implements UserStorage {
 
-    JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public UserDbStorageImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -82,7 +82,7 @@ public class UserDbStorageImpl implements UserStorage {
                     user.getId());
 
             return user;
-        } catch (DataAccessException e) {
+        } catch (Exception e) {
             log.error("Ошибка в обновлении пользователя в БД");
             throw new EntityNotFoundException("Ошибка в обновлении пользователя в БД");
         }

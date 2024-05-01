@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class FilmsUsersDbStorageImpl implements FilmsUsersStorage {
 
 
-    JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
 
     @Override

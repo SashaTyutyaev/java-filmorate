@@ -22,7 +22,7 @@ import java.util.Set;
 @Slf4j
 public class FilmDbStorageImpl implements FilmStorage {
 
-    JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public FilmDbStorageImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;

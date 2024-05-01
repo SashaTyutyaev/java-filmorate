@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class GenreDbStorageImpl implements GenreStorage {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Override
     public List<Genre> getAll() {

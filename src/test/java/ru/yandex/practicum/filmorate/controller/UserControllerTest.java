@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.yandex.practicum.filmorate.exceptions.ValidationException;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.UserService;
+import ru.yandex.practicum.filmorate.storage.FriendshipStorage;
 import ru.yandex.practicum.filmorate.storage.impl.memory.InMemoryUserStorage;
 
 import java.time.LocalDate;
@@ -16,8 +17,9 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 @SpringBootTest
 public class UserControllerTest {
 
+    FriendshipStorage friendshipStorage;
     InMemoryUserStorage inMemoryUserStorage = new InMemoryUserStorage();
-    UserService userService = new UserService(inMemoryUserStorage);
+    UserService userService = new UserService(inMemoryUserStorage,friendshipStorage);
     UserController userController = new UserController(userService);
 
     @AfterEach

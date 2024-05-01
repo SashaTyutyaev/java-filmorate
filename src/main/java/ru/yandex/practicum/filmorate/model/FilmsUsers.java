@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FilmsUsers {
 
-    private int filmId;
-    private int userId;
+    private Integer filmId;
+    private Integer userId;
 }

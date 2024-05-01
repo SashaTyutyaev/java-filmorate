@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 public class MpaDbStorageImpl implements MpaStorage {
 
-    JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     @Override
     public List<Mpa> getAll() {
