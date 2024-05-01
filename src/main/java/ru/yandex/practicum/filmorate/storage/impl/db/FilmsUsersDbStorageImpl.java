@@ -39,10 +39,10 @@ public class FilmsUsersDbStorageImpl implements FilmsUsersStorage {
         try {
             SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate)
                     .withTableName("films_users")
-                    .usingColumns("film_id","user_id");
+                    .usingColumns("film_id", "user_id");
 
-            insert.execute(new MapSqlParameterSource("film_id",filmId)
-                    .addValue("user_id",userId));
+            insert.execute(new MapSqlParameterSource("film_id", filmId)
+                    .addValue("user_id", userId));
         } catch (Exception e) {
             log.error("Ошибка в добавлении лайка к фильму");
             throw new EntityNotFoundException("Ошибка в добавлении лайка к фильму");
@@ -53,7 +53,7 @@ public class FilmsUsersDbStorageImpl implements FilmsUsersStorage {
     public void deleteLike(int filmId, int userId) {
         try {
             String sql = "delete from films_users where film_id = ? and user_id = ?";
-            jdbcTemplate.update(sql,filmId,userId);
+            jdbcTemplate.update(sql, filmId, userId);
         } catch (Exception e) {
             log.error("Ошибка в удалении лайка к фильму");
             throw new EntityNotFoundException("Ошибка в удалении лайка к фильму");

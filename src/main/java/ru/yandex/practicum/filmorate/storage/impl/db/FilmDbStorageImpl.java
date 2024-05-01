@@ -15,7 +15,6 @@ import ru.yandex.practicum.filmorate.storage.FilmStorage;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -201,7 +200,7 @@ public class FilmDbStorageImpl implements FilmStorage {
             film.setGenres(genres);
         }
         String sql = "select user_id from films_users where film_id = ?";
-        int likes = jdbcTemplate.queryForList(sql,film.getId()).size();
+        int likes = jdbcTemplate.queryForList(sql, film.getId()).size();
         film.setLikesCount(likes);
 
         return film;
