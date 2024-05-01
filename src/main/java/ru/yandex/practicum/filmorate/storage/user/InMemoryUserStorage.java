@@ -1,10 +1,9 @@
-package ru.yandex.practicum.filmorate.storage.impl.memory;
+package ru.yandex.practicum.filmorate.storage.user;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.yandex.practicum.filmorate.exceptions.EntityNotFoundException;
 import ru.yandex.practicum.filmorate.model.User;
-import ru.yandex.practicum.filmorate.storage.UserStorage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,14 +53,8 @@ public class InMemoryUserStorage implements UserStorage {
     }
 
     @Override
-    public void deleteUserById(Integer id) {
-        log.info("Пользователь под идентификатором - " + id + " удален");
-        users.remove(users.get(id));
-    }
-
-    @Override
-    public void deleteAllUsers() {
-        log.info("Удалены все пользователи");
-        users.clear();
+    public void deleteUser(User user) {
+        log.info("Пользователь под идентификатором - " + user.getId() + " удален");
+        users.remove(user.getId());
     }
 }
