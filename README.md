@@ -10,7 +10,7 @@ Template repository for Filmorate project.
 
 ### Добавление фильма
 
-`INSERT INTO film (name, release_date, duration, description, rating_id) VALUES ('movie_ame', '2020-01-01', 120, 'Description', '2');`
+`INSERT INTO film (name, release_date, duration, description, mpa_id) VALUES ('movie_ame', '2020-01-01', 120, 'Description', '2');`
 
 ### Добавление жанра к фильму
 
