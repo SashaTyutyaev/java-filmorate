@@ -6,18 +6,18 @@
 [![H2 Database](https://img.shields.io/badge/H2-0078D4?style=for-the-badge&logo=h2&logoColor=white)](https://www.h2database.com/)
 [![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://www.postman.com/)
 
-Filmorate - это приложение для оценки и рекомендаций фильмов. Пользователи могут оценивать фильмы, получать рекомендации и делиться своими любимыми фильмами с другими пользователями.
+Filmorate is an application for rating and recommending movies. Users can rate films, receive recommendations, and share their favorite movies with others.
 
-## 📋 Оглавление
+## 📋 Table of Contents
 
-- [Описание](#описание)
-- [Технологии](#технологии)
+- [Description](#description)
+- [Technologies](#technologies)
 
-## 📝 Описание
+## 📝 Description
 
-Filmorate предоставляет пользователям возможность оценивать фильмы, делиться отзывами и получать персонализированные рекомендации на основе их предпочтений.
+Filmorate allows users to rate movies, share reviews, and get personalized recommendations based on their preferences.
 
-## 🛠️ Технологии
+## 🛠️ Technologies
 - Java 11
 - Spring Boot
 - Maven
