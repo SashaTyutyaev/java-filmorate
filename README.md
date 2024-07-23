@@ -1,23 +1,25 @@
-# java-filmorate
+# Filmorate 🎬
 
-<img width="755" alt="Снимок экрана 2024-05-01 в 04 27 37" src="https://github.com/SashaTyutyaev/java-filmorate/assets/145023074/91b4ac5f-beef-4193-9556-015dd66cfffd">
+[![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white)](https://www.java.com/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)](https://maven.apache.org/)
+[![H2 Database](https://img.shields.io/badge/H2-0078D4?style=for-the-badge&logo=h2&logoColor=white)](https://www.h2database.com/)
+[![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://www.postman.com/)
 
-## Примеры использования
-### Добавление пользователя
+Filmorate - это приложение для оценки и рекомендаций фильмов. Пользователи могут оценивать фильмы, получать рекомендации и делиться своими любимыми фильмами с другими пользователями.
 
-`INSERT INTO user (login, name, email, birthday) VALUES ('user_login', 'user_name', 'user@mail.com', '2000-01-01');`
+## 📋 Оглавление
 
-### Добавление фильма
+- [Описание](#описание)
+- [Технологии](#технологии)
 
-`INSERT INTO film (name, release_date, duration, description, mpa_id) VALUES ('movie_ame', '2020-01-01', 120, 'Description', '2');`
+## 📝 Описание
 
-### Добавление жанра к фильму
+Filmorate предоставляет пользователям возможность оценивать фильмы, делиться отзывами и получать персонализированные рекомендации на основе их предпочтений.
 
-`INSERT INTO film_genre (film_id, genre_id) VALUES (1,2)`
-
-### Запрос в друзья
-`INSERT INTO friendship (user1_id, user2_id) VALUES (1, 2);`
-
-### Поставить лайк фильму
-
-`INSERT INTO films_users(film_id,user_id) VALUES (1,2);`
+## 🛠️ Технологии
+Java 11
+Spring Boot
+Maven
+H2 Database (для разработки и тестирования)
+Postman (для тестирования API)
